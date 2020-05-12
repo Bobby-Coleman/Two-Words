@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def home(request):
   return render(request, 'home.html')
+
+def words(request):
+  return render(request, 'twowords/index.html')
