@@ -13,6 +13,11 @@ body {
     text-align: right;
   }
 
-#navbar-fixed {
-    color: aquamarine;
-}
+/* .navbar-fixed {
+    background-color: aquamarine;
+} */
+
+/* .navbar-fixed {
+    @extend .red, .lighten-4;
+  }
+         */
