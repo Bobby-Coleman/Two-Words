@@ -7,16 +7,16 @@ import requests
 import json
 # from random_word import RandomWords
 
-# Create your views here.
-
-# r = requests.get("https://random-word-api.herokuapp.com/word?number=2")
-
-
 
 def words(request):
   r = requests.get("https://random-word-api.herokuapp.com/word?number=2").json()
   word_one = r[0]
   word_two = r[1]
+  try:
+    words = json.loads(r.content)
+
+  except Exception as e:
+    words = "Error data not loading"
 
   words = {
     'word_one' : word_one,
