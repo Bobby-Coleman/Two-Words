@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<h1>Your Ideas</h1>
 
 {% for word in words %}
+<a href="{% url 'detail' word.id %}">
     <div class="card">
         <div class="card-content">
-          <span class="card-title">Your Ideas</span>
             <p> {{ word.word_one }}</p>
             <p> {{ word.word_two }}</p>
         </div>
