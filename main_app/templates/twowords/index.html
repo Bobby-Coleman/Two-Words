@@ -4,4 +4,12 @@
 <h1>{{ words.word_one }}</h1>
 <h1>{{ words.word_two }}<h1>
 
+    <form method="POST" action="{% url 'list' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn" value="submit">
+      </form>
+      
+
+
 {% endblock %}
