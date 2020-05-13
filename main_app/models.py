@@ -22,4 +22,13 @@ class Word(models.Model):
     #     self.word_two
 
     def __str__(self):
-        return '{} {} {}'.format(self.word_one, self.word_two, self.user)
+        return '{} {} {}'.format(self.word_one, self.word_two, str(self.user.username))
+     
+class Comment(models.Model):
+    word = models.ForeignKey(Word, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField(max_length=260)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):      
+        return '{}{}{}'.format(self.word_one, self.word_two, str(self.user.username))

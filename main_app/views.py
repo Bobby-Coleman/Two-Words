@@ -5,8 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import requests 
 import json
+from . forms import *
 # from random_word import RandomWords
-from . models import Word
+from . models import Word, Comment
 
 @login_required
 def words(request):
@@ -32,18 +33,23 @@ def words(request):
 
   # print(request.user)
   new_word = Word.objects.create(word_one = word_one, word_two = word_two, user_id = request.user.id)
-  context = {'words' : words}
+  print(new_word)
+  context = {
+    'words' : words,
+  }
   return render (request, 'twowords/index.html', context)
-
-
-
 
 
 @login_required
 def words_list(request):
   words = Word.objects.filter(user=request.user)
   # words = Word.objects.all()
-  return render(request, 'twowords/list.html', {'words' : words})
+
+  context = {
+    'words' : words,
+   # 'comments' : comments,
+  }
+  return render(request, 'twowords/list.html', context)
 
 # { 'words': words }
 
