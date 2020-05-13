@@ -4,17 +4,30 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import requests 
+import json
 # from random_word import RandomWords
 
 # Create your views here.
 
-r = requests.get("https://random-word-api.herokuapp.com/word?number=2")
-arr = r.json()
+# r = requests.get("https://random-word-api.herokuapp.com/word?number=2")
 
-def get_words(request):
-  print(arr[0])
 
-get_words()
+
+# def words(request):
+#   r = requests.get("https://random-word-api.herokuapp.com/word?number=2").json()
+#   context = {'r' : r}
+#   return render (request, 'twowords/index.html', context)
+
+
+def words(request):
+  r = requests.get("https://random-word-api.herokuapp.com/word?number=2")
+  try:
+    api = json.loads(r.content)
+  except Exception as e:
+    api = "Error data not loading"
+
+  return render (request, 'twowords/index.html', {'api' : api})
+
 
 # def get_words(req):
 #   print(r)
@@ -34,9 +47,9 @@ get_words()
 def about(request):
   return render(request, 'about.html')
 
-@login_required
-def words(request):
-  return render(request, 'twowords/index.html')
+# @login_required
+# def words(request):
+#   return render(request, 'twowords/index.html')
 
 def signup(request):
   error_message = ''
