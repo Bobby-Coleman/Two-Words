@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Your Words</h1>
+
+{% for word in words %}
+  <a href="{% url 'detail' cat.id %}">
+    <div class="card">
+        <div class="card-content">
+            <p>{{ words.word_one }}</p>
+            <p>{{ words.word_two }}</p>
+        </div>
+    </div>
+  </a>
+
+  {% endblock %}

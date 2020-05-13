@@ -7,7 +7,7 @@ import requests
 import json
 # from random_word import RandomWords
 
-
+@login_required
 def words(request):
   r = requests.get("https://random-word-api.herokuapp.com/word?number=2").json()
   word_one = r[0]
@@ -28,37 +28,8 @@ def words(request):
   return render (request, 'twowords/index.html', context)
 
 
-# def words(request):
-#   r = requests.get("https://random-word-api.herokuapp.com/word?number=2")
-#   try:
-#     api = json.loads(r.content)
-#   except Exception as e:
-#     api = "Error data not loading"
-
-#   return render (request, 'twowords/index.html', {'api' : api})
-
-
-# def get_words(req):
-#   print(r)
-# r = RandomWords()
-
-# def get_words():
-  # print(r.get_random_word(hasDictionaryDef="true", includePartOfSpeech="noun,verb", minCorpusCount=1, maxCorpusCount=10, minDictionaryCount=1, maxDictionaryCount=10, minLength=5, maxLength=10))
-
-# r = requests.get("https://random-word-api.herokuapp.com/word?number=2")
-# if r.status_code != 200:
-#     # This means something went wrong.
-#     raise ApiError('GET /tasks/ {}'.format(r.status_code))
-# for todo_item in r.json():
-#     print('{} {}'.format(todo_item['id'], todo_item['summary'])
-
-
 def about(request):
   return render(request, 'about.html')
-
-# @login_required
-# def words(request):
-#   return render(request, 'twowords/index.html')
 
 def signup(request):
   error_message = ''
