@@ -15,9 +15,9 @@ def words(request):
   # print(type(r))
   # print(x)
 
-  word_one = ''.join(r[0])
-  word_two = ''.join(r[1])
-  print(word_one)
+  word_one = json.dumps(r[0])
+  word_two = json.dumps(r[1])
+  print(type(word_one))
   # print(request.method)
   # try:
   #   words = json.loads(r.content)
@@ -34,6 +34,9 @@ def words(request):
   new_word = Word.objects.create(word_one = word_one, word_two = word_two, user_id = request.user.id)
   context = {'words' : words}
   return render (request, 'twowords/index.html', context)
+
+
+
 
 
 @login_required
