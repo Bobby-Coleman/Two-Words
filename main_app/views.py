@@ -13,20 +13,29 @@ import json
 
 
 
-# def words(request):
-#   r = requests.get("https://random-word-api.herokuapp.com/word?number=2").json()
-#   context = {'r' : r}
-#   return render (request, 'twowords/index.html', context)
-
-
 def words(request):
-  r = requests.get("https://random-word-api.herokuapp.com/word?number=2")
-  try:
-    api = json.loads(r.content)
-  except Exception as e:
-    api = "Error data not loading"
+  r = requests.get("https://random-word-api.herokuapp.com/word?number=2").json()
+  word_one = r[0]
+  word_two = r[1]
 
-  return render (request, 'twowords/index.html', {'api' : api})
+  words = {
+    'word_one' : word_one,
+    'word_two' : word_two,
+  }
+
+  context = {'words' : words }
+
+  return render (request, 'twowords/index.html', context)
+
+
+# def words(request):
+#   r = requests.get("https://random-word-api.herokuapp.com/word?number=2")
+#   try:
+#     api = json.loads(r.content)
+#   except Exception as e:
+#     api = "Error data not loading"
+
+#   return render (request, 'twowords/index.html', {'api' : api})
 
 
 # def get_words(req):
