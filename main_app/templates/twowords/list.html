@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Your Words</h1>
-  {% for word in words %}
-    <p> {{ words.word_one }}</p>
-    <p> {{ words.word_two }}</p>
 
-  {% endfor %}
+{% for word in words %}
+    <div class="card">
+        <div class="card-content">
+          <span class="card-title">Your Ideas</span>
+            <p> {{ words.word_one }}</p>
+            <p> {{ words.word_two }}</p>
+        </div>
+    </div>
+{% endfor %}
 
 {% endblock %}

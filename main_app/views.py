@@ -12,30 +12,35 @@ from . models import Word
 def words(request):
   r = requests.get("https://random-word-api.herokuapp.com/word?number=2").json()
   # print(r)
-  word_one = r[0]
-  word_two = r[1]
-  # print(request.method)
-  try:
-    words = json.loads(r.content)
+  # print(type(r))
+  # print(x)
 
-  except Exception as e:
-    words = "Error data not loading"
+  word_one = ''.join(r[0])
+  word_two = ''.join(r[1])
+  print(word_one)
+  # print(request.method)
+  # try:
+  #   words = json.loads(r.content)
+
+  # except Exception as e:
+  #   words = "Error data not loading"
 
   words = {
       'word_one' : word_one,
       'word_two' : word_two,
   }
-  print(request.user)
+
+  # print(request.user)
   new_word = Word.objects.create(word_one = word_one, word_two = word_two, user_id = request.user.id)
-  context = {'words' : words }
+  context = {'words' : words}
   return render (request, 'twowords/index.html', context)
 
 
 @login_required
 def words_list(request):
-  # words = Word.objects.filter(user=request.user)
-  words = Word.objects.all()
-  return render(request, 'twowords/list.html', words)
+  words = Word.objects.filter(user=request.user)
+  # words = Word.objects.all()
+  return render(request, 'twowords/list.html', {'words' : words})
 
 # { 'words': words }
 
