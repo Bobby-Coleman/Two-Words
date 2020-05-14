@@ -84,7 +84,7 @@ def words_detail(request, word_id):
 
 
 @login_required
-def add_comment(request, comment_id):
+def add_comment(request, word_id):
   form = CommentForm(request.POST)
   if form.is_valid():
     new_comment = form.save(commit=False)

@@ -12,11 +12,26 @@
 </div>
 
 <tbody>
+    {% if word.comment_set.count %}
     {% for comment in word.comment_set.all %}
       <tr>
         <h1>{{ comment.content }}</h1>
       </tr>
     {% endfor %}
+    {% else %}
+    <h5>no ideas yet</h5>
+  {% endif %}
   </tbody>
+
+
+<div class="col s6">
+  <form action="{% url 'add_comment' word.id %}" method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <input type="submit" class="btn" value="Add Idea">
+  </form>
+</div>
+
+
 
 {% endblock %}

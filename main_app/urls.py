@@ -7,5 +7,5 @@ urlpatterns = [
     path('words/list', views.words_list, name='list'),
     path('accounts/signup/', views.signup, name='signup'),
     path('words/<int:word_id>/', views.words_detail, name='detail'),
-    # path('words/<int:word_id>/add_comment', views.add_comment, name='add_comment'),
+    path('words/<int:word_id>/add_comment', views.add_comment, name='add_comment'),
 ]
