@@ -77,10 +77,14 @@ def signup(request):
 @login_required
 def words_detail(request, word_id):
   word = Word.objects.get(id=word_id)
-
-  return render(request, 'twowords/detail.html', {
+  comments = Comment.objects.filter(word=word).order_by('-id')
+  comment_form = CommentForm()
+  context = {
     'word': word,
-  })
+    'comments' : comments,
+    'comment_form' : comment_form
+  }
+  return render(request, 'twowords/detail.html', context)
 
 
 @login_required

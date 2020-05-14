@@ -26,7 +26,7 @@ class Word(models.Model):
 
     
     def get_absolute_url(self):
-        return reverse('detail', kwargs={'word_id': self.id})
+        return reverse('index', kwargs={'word_id': self.id})
 
 class Comment(models.Model):
     content = models.TextField(max_length=260)
