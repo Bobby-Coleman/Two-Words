@@ -23,7 +23,11 @@ class Word(models.Model):
 
     def __str__(self):
         return '{} {} {}'.format(self.word_one, self.word_two, str(self.user.username))
-     
+
+    
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'word_id': self.id})
+
 class Comment(models.Model):
     content = models.TextField(max_length=260)
     word = models.ForeignKey(Word, on_delete=models.CASCADE)

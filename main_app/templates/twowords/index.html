@@ -9,8 +9,10 @@
         <input type="submit" name="click" class="btn" value="submit">
       </form>
 
-        <form action="{% url 'index' %}" method="GET">
-          <button type="submit">next</button>
-        </form>
+      <form action="{% url 'add_comment' word.id %}" method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <input type="submit" class="btn" value="submit">
+      </form>
 
 {% endblock %}

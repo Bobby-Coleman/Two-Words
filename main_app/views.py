@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import requests 
 import json
-from . forms import *
+from .forms import CommentForm
 # from random_word import RandomWords
 from . models import Word, Comment
 
@@ -32,10 +32,12 @@ def words(request):
   }
 
   # print(request.user)
-  new_word = Word.objects.create(word_one = word_one, word_two = word_two)
+  new_word = Word.objects.create(word_one = word_one, word_two = word_two, user_id = request.user.id)
   print(new_word)
+  comment_form = CommentForm()
   context = {
     'words' : words,
+    'comment_form' : comment_form,
   }
   return render (request, 'twowords/index.html', context)
 
@@ -47,7 +49,7 @@ def words_list(request):
 
   context = {
     'words' : words,
-   # 'comments' : comments,
+  #  'comments' : comments,
   }
   return render(request, 'twowords/list.html', context)
 
@@ -81,12 +83,12 @@ def words_detail(request, word_id):
   })
 
 
-# @login_required
-# def add_comment(request, comment_id):
-#   form = CommentForm(request.POST)
-#   if form.is_valid():
-#     new_comment = form.save(commit=False)
-#     new_comment.word_id = word_id
-#     new_comment.save()
-#   return redirect('index', word_id=word_id)
+@login_required
+def add_comment(request, comment_id):
+  form = CommentForm(request.POST)
+  if form.is_valid():
+    new_comment = form.save(commit=False)
+    new_comment.word_id = word_id
+    new_comment.save()
+  return redirect('detail', word_id=word_id)
 
