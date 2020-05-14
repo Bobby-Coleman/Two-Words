@@ -18,7 +18,6 @@ def words(request):
 
   word_one = json.dumps(r[0])
   word_two = json.dumps(r[1])
-  print(type(word_one))
   # print(request.method)
   # try:
   #   words = json.loads(r.content)
@@ -26,25 +25,26 @@ def words(request):
   # except Exception as e:
   #   words = "Error data not loading"
 
-  words = {
-      'word_one' : word_one,
-      'word_two' : word_two,
-  }
+  # words = {
+  #     'word_one' : word_one,
+  #     'word_two' : word_two,
+  # }
 
   # print(request.user)
   new_word = Word.objects.create(word_one = word_one, word_two = word_two, user_id = request.user.id)
-  print(new_word)
-  comment_form = CommentForm()
+  # print(new_word)
+  # comment_form = CommentForm()
   context = {
-    'words' : words,
-    'comment_form' : comment_form,
+    'new_word' : new_word,
   }
   return render (request, 'twowords/index.html', context)
 
 
 @login_required
 def words_list(request):
+  #change to words that are saved by user
   words = Word.objects.filter(user=request.user)
+
   # words = Word.objects.all()
 
   context = {
