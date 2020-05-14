@@ -32,7 +32,7 @@ def words(request):
   }
 
   # print(request.user)
-  new_word = Word.objects.create(word_one = word_one, word_two = word_two, user_id = request.user.id)
+  new_word = Word.objects.create(word_one = word_one, word_two = word_two)
   print(new_word)
   context = {
     'words' : words,
@@ -79,3 +79,14 @@ def words_detail(request, word_id):
   return render(request, 'twowords/detail.html', {
     'word': word,
   })
+
+
+# @login_required
+# def add_comment(request, comment_id):
+#   form = CommentForm(request.POST)
+#   if form.is_valid():
+#     new_comment = form.save(commit=False)
+#     new_comment.word_id = word_id
+#     new_comment.save()
+#   return redirect('index', word_id=word_id)
+

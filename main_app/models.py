@@ -25,10 +25,9 @@ class Word(models.Model):
         return '{} {} {}'.format(self.word_one, self.word_two, str(self.user.username))
      
 class Comment(models.Model):
-    word = models.ForeignKey(Word, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField(max_length=260)
+    word = models.ForeignKey(Word, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):      
-        return '{}{}{}'.format(self.word_one, self.word_two, str(self.user.username))
+        return f"{self.content} on {self.timestamp}"

@@ -11,4 +11,12 @@
     </div>
 </div>
 
+<tbody>
+    {% for comment in word.comment_set.all %}
+      <tr>
+        <td>{{ comment.content }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+
 {% endblock %}
