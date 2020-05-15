@@ -15,26 +15,25 @@
   <form action="{% url 'add_comment' word.id %}" method="post">
     {% csrf_token %}
     {{ comment_form.as_p }}
-    <input type="submit" class="btn" value="Add Idea">
+    <p>don't think too hard.</p><input type="submit" class="btn" value="Add Idea">
   </form>
 </div>
 
 
-<tbody>
+<div class="card-action">
+  <tbody>
     {% if word.comment_set.count %}
+  </div>
     {{ comments.count }} Ideas 
     {% for comment in comments %}
       <tr>
         <p>{{ comment.content }}</p>
+        <a href="{% url 'comment_view' word.id comment.id %}">Edit</a>
       </tr>
     {% endfor %}
     {% else %}
     <h5>no ideas yet</h5>
   {% endif %}
   </tbody>
-
-
-
-
 
 {% endblock %}

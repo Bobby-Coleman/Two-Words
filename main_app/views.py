@@ -3,11 +3,13 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import UpdateView, DeleteView
 import requests 
 import json
 from itertools import chain
 from .forms import CommentForm
 from . models import Word, Comment
+
 
 @login_required
 def words(request):
@@ -62,6 +64,7 @@ def signup(request):
 @login_required
 def words_detail(request, word_id):
   word = Word.objects.get(id=word_id)
+  print(word)
   comments = Comment.objects.filter(word=word).order_by('-id')
   comment_form = CommentForm()
   context = {
@@ -81,3 +84,53 @@ def add_comment(request, word_id):
     new_comment.save()
   return redirect('detail', word_id=word_id)
 
+
+@login_required
+def comment_update(request, word_id, comment_id):
+  form = CommentForm(request.POST)
+  if form.is_valid():
+    new_comment = form.save(commit=False)
+    new_comment.word_id = word_id
+    new_comment.id = comment_id
+    new_comment.save()
+  return redirect('detail', word_id=word_id)
+
+
+# @login_required
+# def update_comment(request, comment_id):
+#   comment = Comment.objects.get(id=comment_id)
+#   word_id = comment.word_id
+#   form = CommentForm(request.POST)
+
+
+#   if form.is_valid():
+#     new_comment = form.save(commit=False)
+#     new_comment.word_id = word_id
+#     new_comment.save()
+#   return redirect('detail', word_id=word_id)
+
+
+def comment_view(request, word_id, comment_id):
+  context = {
+    'word_id' : word_id,
+    'comment_id' : comment_id
+  }
+  return render(request, 'twowords/comment_view.html', context)
+
+
+# @login_required
+# def comment_update(request, word_id, comment_id):
+#   form = CommentForm(request.POST, instance=comment.word_id)
+#   if form.is_valid():
+#     # new_comment.c = form.save(commit=False)
+#     # new_comment.word_id = word_id
+#     # new_comment.save()
+#     return redirect('detail', word_id=word_id)
+
+# def edit_comment(request, word_id, comment_id):
+#     form = CommentForm()
+#         form = CommentForm(request.POST, instance=comment.user)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('anime_title', slug=slug)
+#     return render(request, 'home/edit-comment.html', {'form':form})
