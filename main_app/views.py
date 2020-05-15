@@ -96,6 +96,16 @@ def comment_update(request, word_id, comment_id):
   return redirect('detail', word_id=word_id)
 
 
+
+def comment_view(request, word_id, comment_id):
+  comment_form = CommentForm()
+  context = {
+    'word_id' : word_id,
+    'comment_id' : comment_id
+    # 'comment_form' comment_form
+  }
+  return render(request, 'twowords/comment_view.html', context)
+
 # @login_required
 # def update_comment(request, comment_id):
 #   comment = Comment.objects.get(id=comment_id)
@@ -108,14 +118,6 @@ def comment_update(request, word_id, comment_id):
 #     new_comment.word_id = word_id
 #     new_comment.save()
 #   return redirect('detail', word_id=word_id)
-
-
-def comment_view(request, word_id, comment_id):
-  context = {
-    'word_id' : word_id,
-    'comment_id' : comment_id
-  }
-  return render(request, 'twowords/comment_view.html', context)
 
 
 # @login_required
