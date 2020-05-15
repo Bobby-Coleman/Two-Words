@@ -14,24 +14,26 @@
 <body>
     <header class="navbar-fixed">
         <nav>
+            <di class = "brown-text text-lighten-2">
             <div class="nav-wrapper">
                 {% if user.is_authenticated %}
                 <div>
-                    <li class = "left">{{ user.username }} </li>
+                    <ul class = "left" > <span > signed in as {{ user.username }} </span> </ul>
                 </div>
                 {% endif %}
                 <ul class="right">
                     <li><a href="{% url 'about' %}">About</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'index' %}">Two Words</a></li>
-                    <li><a href="{% url 'list' %}">My Words</a></li>
+                    <li><a href="{% url 'list' %}" class = "brown-text text-lighten-2" >My Words</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
                     {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'login' %}" class = "brown-text text-lighten-2" >Login</a></li>
                     <li><a href="{% url 'signup' %}">Sign Up</a></li>
                     {% endif %}
                 </ul>
             </div>
+        </div>
         </nav>
     </header>
     <main class="container">
